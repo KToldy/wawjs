@@ -13,6 +13,10 @@ describe("cvicenie04 - Object properties concepts", function() {
     hasOverridenProperty
   } = require("../src/introspect.js");
 
+  function allOwnKeys(o){
+    return Object.getOwnPropertyNames(o).concat(Object.getOwnPropertySymbol(o));
+  }
+
   describe("Object.keys", function() {
 
     it("allOwnKeys() works for Strings and Symbols", function() {
@@ -267,7 +271,7 @@ describe("cvicenie04 - Object properties concepts", function() {
       y[sy] = "symbol sy";
 
       var y2 = shallowClone(y);
-      
+
       assert(y2[sx] === "symbol sx");
       assert(y2[sy] === "symbol sy");
     });

@@ -6,7 +6,7 @@ const pipe = (...fns) =>
 
 function pipe(...fns) {
   // TODO: rewrite above reduce to for cycle
-  // urcite to bude vracat funkciu 
+  // urcite to bude vracat funkciu
   // len ju nejako musite poskladat
   // ako ? musite vediet precitat ten reduce hore
   let r=function(){};
@@ -19,7 +19,7 @@ module.exports = pipe;
 // ------------- TESTS -------------------------------
 process.env.SELF_TEST && (() => {
   console.error(`[self test]:${__filename}:...`)
-  
+
   const assert = require("assert");
 
   const a = (v) => `a(${v})`
@@ -33,3 +33,13 @@ process.env.SELF_TEST && (() => {
   console.error(`[self test]:${__filename}:OK`)
 })();
 
+
+// 1 - filter
+// 2 - map
+// 3 - filter (odfiltruj ktory maju menej ako 3)
+// 4 - map
+// 5 -  total point, reduce
+// 6 - reduce (ale nad celym)
+// 7 -  reduce cez set
+// 8 - reduce cez map (alebo cez objekt)
+// 9 - len dopises k 8 filter podla poctu studentov

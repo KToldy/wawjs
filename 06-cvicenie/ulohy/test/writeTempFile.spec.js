@@ -1,4 +1,4 @@
-const writeTempFile = require("../src/writeTempFile3.js");
+const writeTempFile = require("../src/writeTempFile1.js");
 const assert = require("assert");
 
 const os = require("os");
@@ -22,7 +22,7 @@ describe("writeTempFile", function() {
     writeTempFile("test02.txt", "sample data", "utf8",
       (err, fileName) => {
         if (err) return done(err);
-        assert(fileName.startsWith(os.tmpdir())); //FIXME: naive  
+        assert(fileName.startsWith(os.tmpdir())); //FIXME: naive
         done();
       });
   });

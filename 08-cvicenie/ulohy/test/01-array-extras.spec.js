@@ -17,7 +17,7 @@ describe("FP - array functions", function() {
   it("02-students without git repo", () => {
     // pozrite si strukturu objektov v poli a implementujte
     // zoznam studentov ktorym chyba git repo
-    let missingGit = []; //TODO: implement
+    let missingGit = students.filter(({git}) => git == null); //TODO: implement
 
 
     //debug(JSON.stringify(missingGit, null, 2));
@@ -34,7 +34,7 @@ describe("FP - array functions", function() {
     // change ot to better structure []
     // split by semicolon, remove empty etc...
     // implementacia ma byt v reusable funkcii fixProjects
-    // o par riadkov vyzsie 
+    // o par riadkov vyzsie
     let students3 = students.map(fixProjects);
 
     //debug(JSON.stringify(students3, null, 2));
@@ -45,7 +45,7 @@ describe("FP - array functions", function() {
 
   it("04-find students with less then 3 projects", () => {
     // na zaklade predoslej implementacie
-    // by ste uz lahko mali najst studentov 
+    // by ste uz lahko mali najst studentov
     // z menej ako 3ma projektami
     let students4 = students
       .map(fixProjects)
@@ -77,7 +77,7 @@ describe("FP - array functions", function() {
     let studentsWithPoints = students
       .map(fixPoints)
 
-    
+
     assert.deepStrictEqual(
       studentsWithPoints,
       require("./data/restructure-points.json")
@@ -85,7 +85,7 @@ describe("FP - array functions", function() {
 
   });
 
-  
+
   function totalPoints(student) {
     // TODO: implementujte
   }
@@ -107,7 +107,7 @@ describe("FP - array functions", function() {
 
   it("07-sum of points of all students", () => {
     // ak uz mate sumu za kazdeho jedneho, mali by ste vediet zrata
-    // za vsetkych 
+    // za vsetkych
     let sumOfAll = students
       .map(fixPoints)
       .map(totalPoints)
@@ -136,16 +136,16 @@ describe("FP - array functions", function() {
   it("09-group by project", () => {
     // ku kazdemu projektu najst zoznam studentov
     // vysledok ma vyzerat tak ako v group-by-project.json
-    
+
     let groupedByProject = students
       .map(fixProjects)
       .reduce((uniqueProjects, student) => {
-        // TODO: 
+        // TODO:
 
       }, new Map())
     // convert map entries to array
     groupedByProject = [...groupedByProject];
-    
+
     //debug(JSON.stringify(groupedByProject, null, 2));
     assert.deepStrictEqual(
       groupedByProject,

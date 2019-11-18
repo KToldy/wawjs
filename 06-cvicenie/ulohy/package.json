@@ -1,0 +1,23 @@
+{
+  "name": "ulohy",
+  "version": "1.0.0",
+  "description": "Cviko 6",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha --color",
+    "start": "node src/sonar-rules-cli.js 'https://gazelle.ihe.net/sonar/api/rules/search?languages=js'  npx jsontool -a name"
+  },
+  "author": "Kiko",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^3.1.0",
+    "json": "^9.0.6",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "mocha": "^6.2.2"
+  }
+}

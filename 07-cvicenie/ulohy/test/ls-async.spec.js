@@ -13,5 +13,13 @@ describe("test ls-async.js", function() {
     assert.deepStrictEqual(files, expected);
 
   });
+  it("eh", function() {
+    return lsr(666)
+      .then(() => {
+        throw Error("shell fail")
+      })
+      .catch((ex) => assert(ex instanceof TypeError))
+
+  });
 
 });

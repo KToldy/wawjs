@@ -15,7 +15,7 @@ const isNumber = (any) => typeof any === "number" && any === any;
 // Standardny Math.max:
 //    let nan = Math.max(1, 2, 3, "elefant"); -> NaN
 // Novy maxNumber:
-//    maxNumber(1, 2, 3, "elefant") === 3 
+//    maxNumber(1, 2, 3, "elefant") === 3
 
 // 4. dalo by sa to napisat takto:
 // const maxNumber = (...args) => Math.max(...args.filter(isNumber));
@@ -26,32 +26,32 @@ const maxNumber = fn(Math.max, isNumber);
 // 6. a teraz podla sampla kodnite tieto funkcie
 // dole v teste je napisane ake spravanie ocakavame
 // implementacia by mala pouzit existujuce Math a Number APIs
-// 
-const minNumber = 
-const minInteger = 
-const minFinite = 
-const isNegative = 
-const maxNegativeInteger = 
-//const maxNegativeInteger = 
+
+const minNumber = fn(Math.min, isNumber)
+const minInteger = fn(Math.min, isNumber, Number.isInteger)
+const minFinite = fn(Math.min, Number.isFinite)
+const isNegative = (n) => ((n >= 0) );
+const maxNegativeInteger = fn(Math.max, Number.isInteger, isNegative)
+//const maxNegativeInteger =
 
 // 7.   priklad ma demonstrovat ako dokazeme
 //      rychlo, a "bez kodovania" tvorit nove funkcie
-// 7a.  ako by vyzeral zdrojak keby ste to kodli inak ?  
+// 7a.  ako by vyzeral zdrojak keby ste to kodli inak ?
 
 // 8. demo na stringy
-// samozrejme to nie je pouzitelne 
+// samozrejme to nie je pouzitelne
 // aj na ine funkcie (metody)
 // a ine filtre
 const { isStringObject } = require("util").types;
 const isString = s => typeof s === "string";
-const concat = 
-//   
+const concat = String.prototype.concat.bind("")
+//
 const concatSafe = fn(concat, or(isNumber, isString, isStringObject));
 
 
 module.exports = {
   maxNumber, // toto mate kodnute
-  isNegative, 
+  isNegative,
   isNumber,
   minNumber,
   minInteger,
@@ -76,10 +76,10 @@ process.env.SELF_TEST && (() => {
   assert(minNumber(-1, 2, 3, "elefant") === -1);
 
   // TODO: implement max() that will ignore non number params
-  // and return maximal of numbers
+  // and return maximal of numbers)
   assert(minInteger(-Infinity, 1.33, 2, 3, "elefant") === 2);
 
-  // 
+  //
   assert(minNumber(-Infinity, 2, 3, "elefant") === -Infinity);
   assert(minFinite(-Infinity, 2, 3, "elefant") === 2);
 

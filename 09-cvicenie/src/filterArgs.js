@@ -3,14 +3,14 @@ const and = require("./and.js");
 module.exports = (fn, ...filters) =>
   (...args) => fn(...args.filter(and(...filters)));
 
-// 1. co vracia funkcia ? 
+// 1. co vracia funkcia ?
 //    funkciu
-// 2. aku funkciu ? 
+// 2. aku funkciu ?
 //    taku co zavola original funkciu
 // 3. ako zavola original funkciu ?
 //    z odfiltrovanymi parametrami
 // 4. z ako odfiltrovanymi parametrami ?
-//    z takymi co splnaju vsetky 
+//    z takymi co splnaju vsetky
 //    uvedene filter funkcie
 
 //-------------------------- tests ----------------------------------------
@@ -34,3 +34,9 @@ process.env.SELF_TEST && ((filterArgs) => {
 
   console.error(`[self test]:${__filename}:OK`)
 })(module.exports);
+
+// Precitaj si filterarghs, pochopili
+
+// Precitaj si And a pochop
+// Potom tych 5 malych sprav
+// Potom NPM install traverse a kodni funkciu deep freeze

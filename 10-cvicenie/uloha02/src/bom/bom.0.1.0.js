@@ -50,11 +50,12 @@ class RemoveBom extends Transform {
 
     constructor() {
         super();
+        this._bomDone = false;
         this._buff = [];
     }
 
     _transform(chunk, enc, cb) {
-        if (this._bomRemoved){
+        if (this._bomDone){
             return cb(null, chunk);
         }
 
@@ -66,16 +67,16 @@ class RemoveBom extends Transform {
 
     }
 
-    _flush(cb) {
-        if (!this._bomRemoved)
-            this._pushBuffered();
-        cb();
-    }
+
 
     _pushBuffered() {
         let chunk = Buffer.concat([...this._buff]);
-        if (hasBom(chunk)) chunk = chunk.slice(3);
-        this.push(chunk);
+        if (hasBom(chunk)) {
+           this.push(chunk.slice(3));
+       }
+       else {
+           this.push(chunk);
+       }
         this._bomRemoved = true;
         this._buff = null;
     }

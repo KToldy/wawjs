@@ -91,4 +91,44 @@ describe("bom.js tests", function() {
             });
     });
 
+    it("remove bom - shall not buffer all until _flush", (done) => {
+
+      let called = 0;
+
+      let file = `${__dirname}/data/with-bom.txt`;
+      fs.createReadStream(file, { highWaterMark: 1 })
+        .pipe(bom.remove())
+        .on("error", done)
+        .on("data", (chunk) => {
+          called++;
+
+        })
+        .on("finish", () => {
+          assert(called === "// with".length)
+          done();
+        });
+    });
+
+    it("remove bom - shall work with arbitrary chunks sizes", (done) => {
+
+        var chunks = [];
+
+        let file = `${__dirname}/data/with-bom.txt`;
+        fs.createReadStream(file, { highWaterMark: 2 })
+            .pipe(bom.remove())
+            .on("error", done)
+            .on("data", (chunk) => chunks.push(chunk))
+            .on("finish", () => {
+
+                let chunk = Buffer.concat(chunks);
+
+                assert(Buffer.isBuffer(chunk));
+                assert.equal(chunk.indexOf(bomBuffer), -1);
+                assert.equal(chunk[0], 0x2f);
+                assert.equal(chunk.length, 7); //bom and data
+
+                done();
+            });
+    });
+
 });

@@ -8,7 +8,7 @@ module.exports = {
     remove: function() {
         return new RemoveBom();
     }
-}
+};
 
 const bom = Buffer.from([0xEF, 0xBB, 0xBF]);
 const bufLength = (bufs) =>
@@ -50,30 +50,34 @@ class RemoveBom extends Transform {
 
     constructor() {
         super();
-        this._bomDone = false;
         this._buff = [];
     }
+
     _transform(chunk, enc, cb) {
-        if (this._bomDone)
+        if (this._bomRemoved){
             return cb(null, chunk);
+        }
 
         this._buff.push(chunk);
         if (bufLength(this._buff) >= 3)
             this._pushBuffered();
 
         cb();
+
     }
+
     _flush(cb) {
-        if (!this._bomDone)
+        if (!this._bomRemoved)
             this._pushBuffered();
         cb();
     }
+
     _pushBuffered() {
         let chunk = Buffer.concat([...this._buff]);
-        // Zmenime, ak je tam bom v chunku tak ho odstranime pomocou slice
-        if (hasBom(chunk)) chunk = chunk.slice(3)
+        if (hasBom(chunk)) chunk = chunk.slice(3);
         this.push(chunk);
-        this._bomDone = true;
+        this._bomRemoved = true;
         this._buff = null;
     }
+
 }
